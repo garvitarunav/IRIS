@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-import joblib 
 import webbrowser
+import pickle
 
-RFC = joblib.load('iris_model.joblib')
+with open('iris_model.joblib', 'rb') as file:
+    RFC = pickle.load(file)
 
+    
 columns = ['sepal_length','sepal_width','petal_length','petal_width']
 
 def predict():
