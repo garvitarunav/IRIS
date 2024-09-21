@@ -11,16 +11,21 @@ with open('iris_model.joblib', 'rb') as file:
 columns = ['sepal_length','sepal_width','petal_length','petal_width']
 
 def predict():
-    row = np.array([sepal_length, sepal_width, petal_length, petal_width])
-    x = pd.DataFrame([row],columns=columns)
-    prediction = RFC.predict(x)[0]
+    try:
+        row = np.array([sepal_length, sepal_width, petal_length, petal_width])
+        x = pd.DataFrame([row], columns=columns)
+        print(type(RFC))  # Check the type before prediction
+        prediction = RFC.predict(x)[0]
+        
+        if prediction == 0:
+            st.success("It is SETOSA")
+        elif prediction == 1:
+            st.success("It is VERSICOLOR")
+        elif prediction == 2:
+            st.success("It is VIRGINICA")
+    except Exception as e:
+        st.error(f"Error in prediction: {e}")
 
-    if prediction == 0:
-        st.success("It is SETOSA")
-    elif prediction == 1:
-        st.success("It is VERSICOLOR")
-    elif prediction == 2:
-        st.success("It is VIRGINICA")
     # st.balloons()
 
 
